@@ -1,0 +1,35 @@
+@model IEnumerable<EFprojekt.Models.Genres>
+
+@{
+    ViewData["Title"] = "Genrer";
+}
+
+<h1>Genrer</h1>
+
+<p>
+    <a asp-action="Create">Lägg till ny genre</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GenreId">Redigera</a> |
+                <a asp-action="Details" asp-route-id="@item.GenreId">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.GenreId">Radera</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

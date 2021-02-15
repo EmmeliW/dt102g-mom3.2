@@ -1,0 +1,47 @@
+@model IEnumerable<EFprojekt.Models.Loans>
+
+@{
+    ViewData["Title"] = "Lånelista";
+}
+
+<h1>Lånelista</h1>
+
+<p>
+    <a asp-action="Create">Låna en skiva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @* Show only date and not time *@
+                @Convert.ToDateTime(item.LoanDate).ToString("dd/MM/yy")
+                @*Html.DisplayFor(modelItem => item.LoanDate)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordName)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Lämna tillbaka</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

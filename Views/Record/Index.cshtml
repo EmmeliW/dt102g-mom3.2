@@ -1,0 +1,59 @@
+@model IEnumerable<EFprojekt.Models.Records>
+
+@{
+    ViewData["Title"] = "Skivor";
+}
+
+<h1>Min skivsamling</h1>
+
+
+@*Searchfeald*@
+<form asp-controller="Record" asp-action="Index" method="get">
+    <p>
+        Sök på Artist, Titel eller Genre: <br>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Sök" />
+    </p>
+</form>
+
+
+
+<p>
+    <a asp-action="Create">Lägg till skiva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordGenre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordGenre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
